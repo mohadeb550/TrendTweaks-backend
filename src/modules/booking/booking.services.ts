@@ -1,7 +1,7 @@
 
 import httpStatus from "http-status";
 import AppError from "../../errors/AppError";
-import { Car } from "../car/car.model";
+import { Car } from "../posts/post.model";
 import { User } from "../user/user.model";
 import { Booking } from "./booking.model";
 import mongoose from "mongoose";

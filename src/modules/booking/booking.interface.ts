@@ -1,4 +1,4 @@
-import { TCar } from "../car/car.interface";
+import { TCar } from "../posts/post.interface";
 
 export type TBooking = {
     date : string;
