@@ -1,6 +1,16 @@
 import { Schema, model } from "mongoose";
 import { TPost } from "./post.interface";
 
+const commentSchema = new Schema({
+    comment: { type: String, required: true },
+    userInfo: {
+        name : String,
+        email : String,
+        image : String
+      },
+  }, { timestamps: true });
+
+
 const postSchema = new Schema<TPost>({
     title : {
         type : String,
@@ -21,8 +31,18 @@ const postSchema = new Schema<TPost>({
         type : [String],
         required : true,
     },
-    comments : {
-        type : [String],
+    comments : [commentSchema],
+    authorInfo : {
+        type : {
+            name : String,
+            email : String,
+            image : String,
+            role : String,
+        },
+        required : true,
+    },
+    likesDislikes : {
+        type : { likes: Number, dislikes : Number},
     },
     isDeleted : {
         type : Boolean,

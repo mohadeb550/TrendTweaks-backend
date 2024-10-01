@@ -2,7 +2,7 @@ import { Schema, model } from "mongoose";
 import { TPayment } from "./payment.interface";
 
 
-const PaymentSchema = new Schema({
+const PaymentSchema = new Schema<TPayment>({
     email : {
         type : String,
         required: true
@@ -15,12 +15,8 @@ const PaymentSchema = new Schema({
         type : String,
         required: true
     },
-    date : {
-        type : String,
-        required: true
-    },
-    bookingId : {
-        type : String,
+    membersShip : {
+        type : Schema.Types.Mixed,
         required: true
     }
 }, {

@@ -24,7 +24,7 @@ const createUserIntoDB = async (payload : TUser) => {
         
         if(user){
     // create a token for user 
-    const jwtPayload = { email : user.email, role : user.role }
+    const jwtPayload = { email : user.email, role : user.role, _id : user._id }
     const token = jwt.sign(jwtPayload, config.jwt_access_secret as string, { expiresIn : config.jwt_access_expires});
 
     return { user, token}
@@ -32,7 +32,7 @@ const createUserIntoDB = async (payload : TUser) => {
         else{
              const userData = await User.create(payload);
            // create a token for user 
-    const jwtPayload = { email : userData.email, role : userData.role }
+    const jwtPayload = { email : userData.email, role : userData.role , _id : userData._id  }
     const token = jwt.sign(jwtPayload, config.jwt_access_secret as string, { expiresIn : config.jwt_access_expires});
 
     return { userData, token}
@@ -59,7 +59,7 @@ const loginUser = async (payload: TLoginUser) => {
     }
 
     // create a token for user 
-    const jwtPayload = { email : user.email, role : user.role }
+    const jwtPayload = { email : user.email, role : user.role , _id : user._id  }
     const token = jwt.sign(jwtPayload, config.jwt_access_secret as string, { expiresIn : config.jwt_access_expires});
 
     user.password = ""

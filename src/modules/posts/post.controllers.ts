@@ -51,6 +51,17 @@ const updatePost = catchAsync (async (req, res) => {
   });
 })
 
+const addComment = catchAsync (async (req, res) => {
+   const result = await postServices.addCommentToPost(req.params.id , req.body);
+   
+   sendResponse(res, {
+    statusCode: httpStatus.OK,
+    success: true,
+    message: 'Comment added successfully',
+    data: result,
+  });
+})
+
 
 const deletePost = catchAsync (async (req, res) => {
    const result = await postServices.deletePostFromDB(req.params.id);
@@ -66,5 +77,5 @@ const deletePost = catchAsync (async (req, res) => {
 
 
 export const postControllers = {
-    createPost, getAllPosts, getSinglePost, updatePost, deletePost
+    createPost, getAllPosts, getSinglePost, updatePost, deletePost, addComment
 }

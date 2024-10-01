@@ -1,9 +1,19 @@
 
 export type TUser = {
+    _id? : string;
     name : string;
+    password?: string;
     email: string;
-    role : 'user'|'admin',
-    password? : string;
-    image : string;
+    role: string;
+    image: string;
+    memberShip : null | {
+      takenDate : string;
+      exp : string;
+      package: object;
+    };
+    followers? : string[];
+    following? : string[];
+    iat?: number;
+    exp?: number;
     isBlocked? : boolean;
-}
+  };

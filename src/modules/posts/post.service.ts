@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { SortOrder } from "mongoose";
-import { TPost } from "./post.interface";
+import { TComment, TPost } from "./post.interface";
 import { Post} from "./post.model";
 
 const createPostIntoDB = async (payload : TPost) => {
@@ -53,7 +53,7 @@ const getAllPostsFromDB = async (query) => {
       sortOption.pricePerHour = Number(query.sortByCost) as SortOrder;
     }
   
-    const cars = await Car.find(filter).sort(sortOption);
+    const cars = await Post.find(filter).sort(sortOption);
     return cars;
 }
 
@@ -68,6 +68,13 @@ const updatePostIntoDB = async (id: string , payload: Partial<TPost>) => {
     return result;
 }
 
+const addCommentToPost = async (id: string , comment: TComment) => {
+    const result = await Post.findByIdAndUpdate(id, {
+      $push: { comments: comment } // Push the new comment to the comments array
+    } ,{new: true });
+    return result;
+}
+
 const deletePostFromDB = async ( id: string) => {
     const result = await Post.findByIdAndUpdate(id, { isDeleted: true } ,{new: true });
     return result;
@@ -77,7 +84,5 @@ const deletePostFromDB = async ( id: string) => {
 export const postServices = {
     createPostIntoDB,
     getAllPostsFromDB,
-    getSinglePostFromDB, 
-    updatePostIntoDB, 
-    deletePostFromDB,
+    getSinglePostFromDB,    updatePostIntoDB,    addCommentToPost
 }
