@@ -16,6 +16,19 @@ const getCommentsFromDB = async (postId: string) => {
   return result;
 }
 
+const deleteCommentFromDB = async (commentId: string) => {
+  const result = await Comment.findByIdAndDelete(commentId);
+  return result;
+}
+
+const updateCommentIntoDB = async (commentId: string , payload: Partial<TComment>) => {
+  const result = await Comment.findByIdAndUpdate(commentId, payload ,{new: true });
+  return result;
+}
+
+
+
+
 // const getStatisticsFromDB = async () => {
 //     // Count total bookings
 //     const totalBookings = await Booking.countDocuments();
@@ -39,5 +52,5 @@ const getCommentsFromDB = async (postId: string) => {
 
 
 export const commentServices = {
-    addCommentToDB, getCommentsFromDB
+    addCommentToDB, getCommentsFromDB, deleteCommentFromDB, updateCommentIntoDB
 }

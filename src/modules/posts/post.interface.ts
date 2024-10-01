@@ -13,6 +13,8 @@ export type TPost = {
         email: string;
         image : string;
         role :string;
+        authorId: string;
+        authorEmail : string;
       }
     isDeleted? : boolean;
     createdAt? : string,

@@ -77,12 +77,6 @@ const updatePostIntoDB = async (id: string , payload: Partial<TPost>) => {
     return result;
 }
 
-const addCommentToPost = async (id: string , comment: TComment) => {
-    const result = await Post.findByIdAndUpdate(id, {
-      $push: { comments: comment } // Push the new comment to the comments array
-    } ,{new: true });
-    return result;
-}
 
 const deletePostFromDB = async ( id: string) => {
     const result = await Post.findByIdAndUpdate(id, { isDeleted: true } ,{new: true });
@@ -93,5 +87,5 @@ const deletePostFromDB = async ( id: string) => {
 export const postServices = {
     createPostIntoDB,
     getAllPostsFromDB,
-    getSinglePostFromDB,    updatePostIntoDB,    addCommentToPost
+    getSinglePostFromDB,    updatePostIntoDB, 
 }

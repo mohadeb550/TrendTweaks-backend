@@ -38,6 +38,8 @@ const postSchema = new Schema<TPost>({
             email : String,
             image : String,
             role : String,
+            authorId : String,
+            authorEmail : String,
         },
         required : true,
     },

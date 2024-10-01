@@ -7,17 +7,10 @@ const router = express.Router();
 
 router.get('/:postId', auth('user','admin') , commentController.getComments )
 
-// router.patch('/cancel', auth('admin'), bookingControllers.cancelBooking)
+router.delete('/:commentId', auth('user','admin'), commentController.deleteComment)
 
-// router.put('/:bookingId', auth('admin', 'user'), bookingControllers.updateBooking)
+router.patch('/:commentId', auth('admin', 'user'), commentController.updateComment)
 
-// // get user's bookings
-// router.get('/my-bookings', auth('user') , bookingControllers.getUserBookings )
-
-// // get site statistics 
-// router.get('/statistics', auth('admin') , bookingControllers.getStatistics )
-
-// router.get('/:bookingId', auth('admin', 'user') , bookingControllers.getSingleBooking )
 
 
 // add comments

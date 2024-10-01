@@ -38,6 +38,17 @@ const getAllUsers = catchAsync (async (req, res) => {
    });
  })
  
+ const followUser = catchAsync (async (req, res) => {
+    const result = await userServices.followUser(req.body);
+    
+    sendResponse(res, {
+     statusCode: httpStatus.OK,
+     success: true,
+     message: 'You followed the user',
+     data: result,
+   });
+ })
+ 
  
  const deleteUser = catchAsync (async (req, res) => {
     const result = await userServices.deleteUserFromDB(req.params.id);
@@ -51,6 +62,6 @@ const getAllUsers = catchAsync (async (req, res) => {
  })
 
 export const userControllers = {
-   getAllUsers, getSingleUser, updateUser, deleteUser
+   getAllUsers, getSingleUser, updateUser, deleteUser, followUser
 }
  

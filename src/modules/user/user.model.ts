@@ -18,6 +18,12 @@ const userSchema = new Schema <TUser>({
     password : {
         type : String,
     },
+    followers : {
+        type : [String],
+    },
+    following: {
+        type : [String]
+    },
     memberShip: {
         type: Schema.Types.Mixed, // Allows either 'null' or an object
         default: null
