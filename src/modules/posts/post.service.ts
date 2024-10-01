@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { SortOrder } from "mongoose";
-import { TComment, TPost } from "./post.interface";
+import { TComment, TPost, TPostsQuery } from "./post.interface";
 import { Post} from "./post.model";
 
 const createPostIntoDB = async (payload : TPost) => {
@@ -8,13 +8,21 @@ const createPostIntoDB = async (payload : TPost) => {
     return result;
 }
 
-// query type asbe 
-const getAllPostsFromDB = async (query) => {
+
+// const getMyPostsFromDB = async (userEmail : string) => {
+ 
+  
+//     // const posts = await Post.find(filter).sort(sortOption))
+//     // return posts;
+// }
+
+
+const getAllPostsFromDB = async (query : TPostsQuery) => {
         const filter : Record<string ,unknown> = { isDeleted : false};
   
         //  {
                 // location : 'tangail'
-                // carType : 'sedun'
+                // userEmail : 'sedun'
                 // costRange : '10-35'
                 // sortByCost : -1
                 // status : 'unavailable'
@@ -27,9 +35,9 @@ const getAllPostsFromDB = async (query) => {
       ];
     }
   
-    // Add carType to filter if provided
-    if (query.carType) {
-      filter.carType = query.carType;
+    // Add userEmail to filter if provided
+    if (query.userEmail) {
+      filter["authorInfo.email"] = query.userEmail;
     }
   
     // Add status to filter if provided
@@ -52,9 +60,10 @@ const getAllPostsFromDB = async (query) => {
     if (query.sortByCost) {
       sortOption.pricePerHour = Number(query.sortByCost) as SortOrder;
     }
+ 
   
-    const cars = await Post.find(filter).sort(sortOption);
-    return cars;
+    const posts = await Post.find(filter).sort({ createdAt : 'descending', ...sortOption})
+    return posts;
 }
 
 

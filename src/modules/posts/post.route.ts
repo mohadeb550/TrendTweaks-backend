@@ -16,14 +16,13 @@ router.post('/', auth('admin', 'user') , postControllers.createPost )
 // update  
 router.put('/:id', auth('admin','user'), postControllers.updatePost )
 
-// add comments
-router.patch('/add-comment/:id', auth('admin','user'), postControllers.addComment )
-
 // delete  
 router.delete('/:id', auth('admin') , postControllers.deletePost)
 
 // get 
 router.get('/',  postControllers.getAllPosts)
+
+
 router.get('/:id', postControllers.getSinglePost)
 
 

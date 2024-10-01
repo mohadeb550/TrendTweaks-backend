@@ -1,7 +1,7 @@
 
 import express from 'express';
 import { AuthRoutes } from '../modules/auth/auth.route';
-import { BookingRoutes } from '../modules/booking/booking.route';
+import { CommentRoutes } from '../modules/comments/comment.route';
 import { UserRoutes } from '../modules/user/user.route';
 import { PaymentRoutes } from '../modules/payment/payment.route';
 import { PostRoutes } from '../modules/posts/post.route';
@@ -23,8 +23,8 @@ const moduleRoutes = [
       route: PostRoutes,
     },
     {
-      path: '/bookings',
-      route: BookingRoutes,
+      path: '/comments',
+      route: CommentRoutes,
     },
     {
       path: '/payments',

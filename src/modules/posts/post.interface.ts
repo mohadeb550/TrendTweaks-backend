@@ -35,10 +35,10 @@ export type TComment = {
 //     bookingId : string;
 // }
 
-// export type TCarsQuery = {
-//       carType?: string,
-//       costRange?: string,
-//       sortByCost? : string;
-//       location?: string,
-//       status? : string,
-//   }
+export type TCarsQuery = {
+      userEmail?: string,
+      costRange?: string,
+      sortByCost? : string;
+      location?: string,
+      status? : string,
+  }
