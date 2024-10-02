@@ -18,7 +18,8 @@ export type TPost = {
         role :string;
         authorId: string;
         authorEmail : string;
-      }
+      },
+    isPremium? : boolean;
     isDeleted? : boolean;
     createdAt? : string,
     updatedAt? : string,
@@ -36,14 +37,10 @@ export type TComment = {
  
 }
 
-// export type TReturnCarPayload = {
-//     bookingId : string;
-// }
 
 export type TCarsQuery = {
       userEmail?: string,
-      costRange?: string,
-      sortByCost? : string;
-      location?: string,
-      status? : string,
+      category?: string,
+      sortByUpvote? : string;
+      searchTerm?: string,
   }

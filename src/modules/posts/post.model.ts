@@ -51,6 +51,9 @@ const postSchema = new Schema<TPost>({
         type : Boolean,
         default : false,
     },
+    isPremium : {
+        type : Boolean,
+    },
 }, { timestamps : true })
 
 export const Post = model<TPost> ('Post', postSchema);

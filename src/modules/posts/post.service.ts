@@ -68,17 +68,18 @@ const getAllPostsFromDB = async (query : TPostsQuery) => {
         const filter : Record<string ,unknown> = { isDeleted : false};
   
         //  {
-                // location : 'tangail'
-                // userEmail : 'sedun'
-                // costRange : '10-35'
-                // sortByCost : -1
-                // status : 'unavailable'
+                // searchTerm : 'tangail'
+                // userEmail : '@gmil.com'
+               // category : 'Ai'
+                // sortByUpvote : -1
+        
         //  }
   
     // Add search value to filter if provided
-    if (query.location) {
+    if (query.searchTerm) {
       filter.$or = [
-        { location: { $regex: query.location, $options: 'i' } },
+        { title: { $regex: query.searchTerm, $options: 'i' } },
+        { description: { $regex: query.searchTerm, $options: 'i' } },
       ];
     }
   
@@ -88,28 +89,22 @@ const getAllPostsFromDB = async (query : TPostsQuery) => {
     }
   
     // Add status to filter if provided
-    if (query.status) {
-      filter.status = query.status;
+    if (query.category) {
+      filter.category = query.category;
     }
+
   
-    // Add pricePerHour to filter if provided
-    if (query.costRange) {
-      const [startingCost, endingCost] = query.costRange.split('-').map(Number);
-      filter.pricePerHour = { $gte: startingCost, $lte: endingCost };
-    //   console.log(filter)
-    }
-  
-    // Set sort option based on sortByPrice if provided
+    // Set sort option based on sortByUpvote if provided
     const sortOption : {
-       pricePerHour?: SortOrder;
+       votes?: SortOrder;
       } = {};
   
-    if (query.sortByCost) {
-      sortOption.pricePerHour = Number(query.sortByCost) as SortOrder;
+    if (query.sortByUpvote) {
+      sortOption.votes = query?.sortByUpvote === '1'? 'ascending': 'descending';
     }
  
   
-    const posts = await Post.find(filter).sort({ createdAt : 'descending', ...sortOption})
+    const posts = await Post.find(filter).sort({...sortOption, createdAt : 'descending', })
     return posts;
 }
 
