@@ -9,6 +9,9 @@ const router = express.Router();
 // create 
 router.post('/', auth('admin', 'user') , postControllers.createPost )
 
+// vote and upvote 
+router.post('/vote', auth('admin', 'user') , postControllers.votePost )
+
 // return the car
 // router.put('/return', validateRequest(carValidations.returnCarValidationSchema), auth('admin'), postControllers.returnPost )
 

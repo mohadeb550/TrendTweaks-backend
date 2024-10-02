@@ -32,6 +32,9 @@ const userSchema = new Schema <TUser>({
         type : String,
         required : true,
     },
+    coverImg : {
+        type : String,
+    },
     isBlocked : {
         type : Boolean,
         default : false,

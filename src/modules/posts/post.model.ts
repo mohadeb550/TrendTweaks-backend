@@ -24,9 +24,6 @@ const postSchema = new Schema<TPost>({
         type : String,
         required : true,
     },
-    rating : {
-        type : String,
-    },
     images : {
         type : [String],
         required : true,
@@ -43,9 +40,13 @@ const postSchema = new Schema<TPost>({
         },
         required : true,
     },
-    likesDislikes : {
-        type : { likes: Number, dislikes : Number},
+    votes: { 
+        type: Number, 
+        default: 0 
     },
+    voters: [{ 
+        userId: String, voteType: String 
+    }],
     isDeleted : {
         type : Boolean,
         default : false,
