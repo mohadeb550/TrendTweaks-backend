@@ -72,7 +72,8 @@ const getAllPostsFromDB = async (query : TPostsQuery) => {
                 // userEmail : '@gmil.com'
                // category : 'Ai'
                 // sortByUpvote : -1
-        
+                // skip : 0
+                // limit : 10
         //  }
   
     // Add search value to filter if provided
@@ -102,10 +103,11 @@ const getAllPostsFromDB = async (query : TPostsQuery) => {
     if (query.sortByUpvote) {
       sortOption.votes = query?.sortByUpvote === '1'? 'ascending': 'descending';
     }
- 
-  
-    const posts = await Post.find(filter).sort({...sortOption, createdAt : 'descending', })
-    return posts;
+
+    const posts = await Post.find(filter).sort({...sortOption, createdAt : 'descending', }).skip(Number(query?.skip)).limit(Number(query?.limit))
+
+    const totalPosts = await Post.countDocuments()
+    return { totalPosts, posts};
 }
 
 

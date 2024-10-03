@@ -14,6 +14,6 @@ router.post('/create-payment-intent', paymentControllers.createPaymentIntent )
 router.post('/', auth('user'), paymentControllers.savePaymentInfo )
 
 // // get paymenet history 
-// router.get('/get-payment-history/:email', auth( 'user'),  paymentController.getPaymentHistory)
+router.get('/', auth('user', 'admin'),  paymentControllers.getPaymentHistory)
 
 export const PaymentRoutes = router;

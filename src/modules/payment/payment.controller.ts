@@ -43,30 +43,22 @@ const createPaymentIntent = catchAsync (async (req, res) => {
    });
  })
  
-//  const updateUser = catchAsync (async (req, res) => {
-//     const result = await userServices.updateUserIntoDB(req.params.id , req.body);
-    
-//     sendResponse(res, {
-//      statusCode: httpStatus.OK,
-//      success: true,
-//      message: 'User updated successfully',
-//      data: result,
-//    });
-//  })
- 
- 
-//  const deleteUser = catchAsync (async (req, res) => {
-//     const result = await userServices.deleteUserFromDB(req.params.id);
-    
-//     sendResponse(res, {
-//      statusCode: httpStatus.OK,
-//      success: true,
-//      message: 'User deleted successfully',
-//      data: result,
-//    });
-//  })
+
+ const getPaymentHistory = catchAsync (async (req, res) => {
+
+  const result = await paymentServices.getPaymentHistory(req.query);
+  
+  sendResponse(res, {
+   statusCode: httpStatus.OK,
+   success: true,
+   message: 'History retrieved successfully',
+   data: result,
+ });
+})
+
+
 
 export const paymentControllers = {
-  createPaymentIntent, savePaymentInfo
+  createPaymentIntent, savePaymentInfo, getPaymentHistory
 }
  

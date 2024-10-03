@@ -38,9 +38,11 @@ export type TComment = {
 }
 
 
-export type TCarsQuery = {
+export type TPostsQuery = {
       userEmail?: string,
       category?: string,
       sortByUpvote? : string;
       searchTerm?: string,
+      skip? : string,
+      limit? : string,
   }
