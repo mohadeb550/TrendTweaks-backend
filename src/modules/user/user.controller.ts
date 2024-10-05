@@ -5,7 +5,7 @@ import { userServices } from "./user.service";
 
 const getAllUsers = catchAsync (async (req, res) => {
 
-    const result = await userServices.getAllUsersFromDB();
+    const result = await userServices.getAllUsersFromDB(req.query?.role);
     
     sendResponse(res, {
      statusCode: httpStatus.OK,

@@ -65,7 +65,7 @@ const voteToPost = async (payload : {
 
 
 const getAllPostsFromDB = async (query : TPostsQuery) => {
-        const filter : Record<string ,unknown> = { isDeleted : false};
+        const filter : Record<string ,unknown> = {};
   
         //  {
                 // searchTerm : 'tangail'
@@ -123,7 +123,7 @@ const updatePostIntoDB = async (id: string , payload: Partial<TPost>) => {
 
 
 const deletePostFromDB = async ( id: string) => {
-    const result = await Post.findByIdAndUpdate(id, { isDeleted: true } ,{new: true });
+    const result = await Post.findByIdAndDelete(id);
     return result;
 }
 
@@ -132,5 +132,5 @@ export const postServices = {
     createPostIntoDB,
     getAllPostsFromDB,
     getSinglePostFromDB,
-    updatePostIntoDB, voteToPost
+    updatePostIntoDB, voteToPost, deletePostFromDB
 }

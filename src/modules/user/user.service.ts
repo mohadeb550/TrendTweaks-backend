@@ -2,8 +2,11 @@ import { TUser } from "./user.interface";
 import { User } from "./user.model";
 
 
-const getAllUsersFromDB = async () => {
-    const result = await User.find({});
+const getAllUsersFromDB = async (role: string) => {
+    let query = {};
+    if(role){query = { role}}
+
+    const result = await User.find(query);
     return result;
 }
 

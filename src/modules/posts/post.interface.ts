@@ -20,7 +20,6 @@ export type TPost = {
         authorEmail : string;
       },
     isPremium? : boolean;
-    isDeleted? : boolean;
     createdAt? : string,
     updatedAt? : string,
 };

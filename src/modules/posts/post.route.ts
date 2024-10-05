@@ -12,15 +12,12 @@ router.post('/', auth('admin', 'user') , postControllers.createPost )
 // vote and upvote 
 router.post('/vote', auth('admin', 'user') , postControllers.votePost )
 
-// return the car
-// router.put('/return', validateRequest(carValidations.returnCarValidationSchema), auth('admin'), postControllers.returnPost )
-
 
 // update  
 router.put('/:id', auth('admin','user'), postControllers.updatePost )
 
 // delete  
-router.delete('/:id', auth('admin') , postControllers.deletePost)
+router.delete('/:id', auth('admin', 'user') , postControllers.deletePost)
 
 // get 
 router.get('/',  postControllers.getAllPosts)

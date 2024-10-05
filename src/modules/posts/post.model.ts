@@ -47,10 +47,6 @@ const postSchema = new Schema<TPost>({
     voters: [{ 
         userId: String, voteType: String 
     }],
-    isDeleted : {
-        type : Boolean,
-        default : false,
-    },
     isPremium : {
         type : Boolean,
     },
