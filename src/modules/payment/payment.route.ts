@@ -11,7 +11,7 @@ router.post('/create-payment-intent', paymentControllers.createPaymentIntent )
 
 
 // save payment history 
-router.post('/', auth('user'), paymentControllers.savePaymentInfo )
+router.post('/', auth('user', 'admin'), paymentControllers.savePaymentInfo )
 
 // // get paymenet history 
 router.get('/', auth('user', 'admin'),  paymentControllers.getPaymentHistory)

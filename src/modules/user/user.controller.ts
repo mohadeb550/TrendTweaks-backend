@@ -5,7 +5,7 @@ import { userServices } from "./user.service";
 
 const getAllUsers = catchAsync (async (req, res) => {
 
-    const result = await userServices.getAllUsersFromDB(req.query?.role);
+    const result = await userServices.getAllUsersFromDB(req.query?.role as string);
     
     sendResponse(res, {
      statusCode: httpStatus.OK,
@@ -62,6 +62,7 @@ const getAllUsers = catchAsync (async (req, res) => {
  })
 
 export const userControllers = {
-   getAllUsers, getSingleUser, updateUser, deleteUser, followUser
+   getAllUsers, getSingleUser, updateUser, deleteUser,
+   followUser, 
 }
  

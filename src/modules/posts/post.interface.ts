@@ -4,10 +4,10 @@ export type TPost = {
     title : string;
     category : string;
     votes?: number
-    voters?: [{ 
+    voters?: { 
       userId: string, 
       voteType: string 
-    }],
+    }[],
     description : string;
     images : string[];
     comments? :  TComment[];

@@ -9,8 +9,8 @@ const app = express()
 app.use(express.json())
 
 // use cors 
-app.use(cors( {origin: "*"}));
-// app.use(cors( {origin: "https://car-rental-frontend-hazel.vercel.app"}));
+// app.use(cors( {origin: "*"}));
+app.use(cors( {origin: "https://trend-tweaks.vercel.app"}));
 
 // use router
 app.use('/api', router)

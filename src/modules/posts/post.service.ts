@@ -17,7 +17,7 @@ const voteToPost = async (payload : {
 }) => {
 
   const { postId, userId, voteType } = payload;
-  let post = await Post.findById(postId);
+  const post = await Post.findById(postId);
 
 
   // Check if the user has already voted on this post
@@ -28,38 +28,34 @@ const voteToPost = async (payload : {
     // If the user has already voted and tries to change their vote
     if (existingVote.voteType !== voteType) {
       if (voteType === 'upvote') {
-        post.votes += 2; // Change from downvote (-1) to upvote (+1), so +2
+        post!.votes! += 2; // Change from downvote (-1) to upvote (+1), so +2
       } else if (voteType === 'downvote') {
-        post.votes -= 2; // Change from upvote (+1) to downvote (-1), so -2
+        post!.votes! -= 2; // Change from upvote (+1) to downvote (-1), so -2
       }
 
       // Update the vote type in the voters array
       existingVote.voteType = voteType;
     }else{
      const restVoters =  post?.voters?.filter(voter => voter.userId !== userId)
-     post?.voters = restVoters;
+     post!.voters = restVoters;
 
-     if(voteType === 'downvote')post?.votes += 1;
-     if(voteType === 'upvote')post?.votes -= 1;
+     if(voteType === 'downvote')post!.votes! += 1;
+     if(voteType === 'upvote')post!.votes! -= 1;
     }
   } else {
     // If the user has not voted, add a new vote
-    post.voters.push({ userId, voteType });
+    post!.voters!.push({ userId, voteType });
 
     if (voteType === 'upvote') {
-      post.votes += 1; // Increment votes by 1 for upvote
+      post!.votes! += 1; // Increment votes by 1 for upvote
     } else if (voteType === 'downvote') {
-      post.votes -= 1; // Decrease votes by 1 for downvote
+      post!.votes! -= 1; // Decrease votes by 1 for downvote
     }
   }
 
   // Save the post with the updated vote count
  const res = await post?.save();
   return res
-
-
-    // const result = await Post.create(payload);
-    // return result;
 }
 
 

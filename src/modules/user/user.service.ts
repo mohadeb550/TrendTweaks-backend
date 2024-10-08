@@ -11,7 +11,9 @@ const getAllUsersFromDB = async (role: string) => {
 }
 
 const getSingleUserFromDB = async (email: string) => {
-    const result = await User.findOne({ email});
+    const result = await User.findOne({ email})
+    .populate('followers')
+    .populate('following');
     return result;
 }
 
@@ -48,5 +50,5 @@ const deleteUserFromDB = async ( id: string) => {
 
 
 export const userServices = {
-    getAllUsersFromDB, getSingleUserFromDB ,updateUserIntoDB, deleteUserFromDB, followUser
+    getAllUsersFromDB, getSingleUserFromDB ,updateUserIntoDB, deleteUserFromDB, followUser, 
 }
