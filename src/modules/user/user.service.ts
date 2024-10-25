@@ -35,12 +35,32 @@ const followUser = async (payload : { userId: string, targetedUserId : string}) 
     // update the user who requested to follow 
     if(result){
         const response = await User.findByIdAndUpdate(userId, {
-            $push : { following : targetedUserId}
+            $addToSet : { following : targetedUserId}
         }, { new: true})
         return response;
     }
     return result;
 }
+
+const unFollowUser = async (payload : { userId: string, targetedUserId : string}) => {
+    const { userId, targetedUserId } = payload;
+
+    // update the user who will be unFollowed 
+    const result = await User.findByIdAndUpdate(targetedUserId, {
+      $pull: { followers: userId } 
+    } ,{new: true });
+
+
+    // update the user who requested to unfollow 
+    if(result){
+        const response = await User.findByIdAndUpdate(userId, {
+            $pull : { following : targetedUserId}
+        }, { new: true})
+        return response;
+    }
+    return result;
+}
+
 
 
 const deleteUserFromDB = async ( id: string) => {
@@ -50,5 +70,5 @@ const deleteUserFromDB = async ( id: string) => {
 
 
 export const userServices = {
-    getAllUsersFromDB, getSingleUserFromDB ,updateUserIntoDB, deleteUserFromDB, followUser, 
+    getAllUsersFromDB, getSingleUserFromDB ,updateUserIntoDB, deleteUserFromDB, followUser, unFollowUser,  
 }
